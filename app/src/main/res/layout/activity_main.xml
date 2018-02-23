@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawerLayout"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.wazabi.liveat500px.activity.MainActivity">
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:background="?attr/colorPrimary"
+            android:layout_width="match_parent"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            android:layout_height="?attr/actionBarSize">
+
+        </android.support.v7.widget.Toolbar>
+
+
+    <FrameLayout
+        android:id="@+id/contentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+        
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_gravity="start"
+        android:background="#ffffff"
+        android:orientation="vertical"
+        android:layout_width="@dimen/drawer_menu_width"
+        android:layout_height="match_parent">
+        <Button
+            android:text="Simple Button"
+            android:contentDescription="Simple Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
+</android.support.v4.widget.DrawerLayout>
