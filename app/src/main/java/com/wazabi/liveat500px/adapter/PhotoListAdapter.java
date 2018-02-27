@@ -1,5 +1,6 @@
 package com.wazabi.liveat500px.adapter;
 
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -54,7 +55,9 @@ public class PhotoListAdapter extends BaseAdapter {
         PhotoItemDao dao =(PhotoItemDao) getItem(position);
         item.setNameText(dao.getCaption());
         item.setDescriptionText(dao.getUsername()+"\n" + dao.getCamera());
-        item.setImageUrl(dao.getImageUrl());
+        String imgView = dao.getImageUrl().toString().replaceAll("]","").replace("[","");
+        Log.d("imgView","imgView"+imgView);
+        item.setImageUrl(imgView);
         if(position>lastPosition) {
 
             Animation anim = AnimationUtils.loadAnimation(parent.getContext(), R.anim.up_from_bottom);
@@ -62,5 +65,9 @@ public class PhotoListAdapter extends BaseAdapter {
             lastPosition = position;
         }
         return item;
+    }
+
+    public  void  increaseLastPosition(int amount){
+        lastPosition += amount;
     }
 }

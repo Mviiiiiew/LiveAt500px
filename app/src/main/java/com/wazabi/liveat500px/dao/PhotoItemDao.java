@@ -1,13 +1,16 @@
 package com.wazabi.liveat500px.dao;
 
-import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
+import com.google.gson.annotations.Expose;
+
+
 /**
- * Created by MAN on 2/11/2018.
+ * Created by MAN on 2/23/2018.
  */
+
 public class PhotoItemDao  {
+
 
         @SerializedName("id")
         @Expose
@@ -17,7 +20,7 @@ public class PhotoItemDao  {
         private String link;
         @SerializedName("image_url")
         @Expose
-        private String imageUrl;
+        private List<String> imageUrl = null;
         @SerializedName("caption")
         @Expose
         private String caption;
@@ -41,7 +44,7 @@ public class PhotoItemDao  {
         private String camera;
         @SerializedName("lens")
         @Expose
-        private String lens;
+        private Object lens;
         @SerializedName("focal_length")
         @Expose
         private String focalLength;
@@ -71,11 +74,11 @@ public class PhotoItemDao  {
             this.link = link;
         }
 
-        public String getImageUrl() {
+        public List<String> getImageUrl() {
             return imageUrl;
         }
 
-        public void setImageUrl(String imageUrl) {
+        public void setImageUrl(List<String> imageUrl) {
             this.imageUrl = imageUrl;
         }
 
@@ -135,11 +138,11 @@ public class PhotoItemDao  {
             this.camera = camera;
         }
 
-        public String getLens() {
+        public Object getLens() {
             return lens;
         }
 
-        public void setLens(String lens) {
+        public void setLens(Object lens) {
             this.lens = lens;
         }
 
@@ -173,7 +176,6 @@ public class PhotoItemDao  {
 
         public void setAperture(String aperture) {
             this.aperture = aperture;
-
+        }
 
     }
-}

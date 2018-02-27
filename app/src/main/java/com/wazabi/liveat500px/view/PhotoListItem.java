@@ -16,6 +16,8 @@ import com.inthecheesefactory.thecheeselibrary.view.BaseCustomViewGroup;
 import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
 import com.wazabi.liveat500px.R;
 
+import java.util.List;
+
 /**
  * Created by nuuneoi on 11/16/2014.
  */
@@ -117,7 +119,10 @@ public class PhotoListItem extends BaseCustomViewGroup {
     }
 
     public void setImageUrl(String url) {
-       Glide.with(getContext()).load(url).placeholder(R.drawable.loading).into(ivImg);
+        Log.d("getImageUrl","getImageUrl"+url.toString());
+
+
+       Glide.with(getContext()).load(url.toString()).placeholder(R.drawable.loading).into(ivImg);
      //   Log.d("url","url = "+url);
 
 
