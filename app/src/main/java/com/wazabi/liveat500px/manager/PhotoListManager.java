@@ -30,12 +30,19 @@ public class PhotoListManager {
 
     }
 
-    public void insertDaoAtTopPosition(PhotoItemCollectionDao newDao){
-        if(dao == null)
+    public void insertDaoAtTopPosition(PhotoItemCollectionDao newDao) {
+        if (dao == null)
             dao = new PhotoItemCollectionDao();
-        if(dao.getData() == null)
+        if (dao.getData() == null)
             dao.setData(new ArrayList<PhotoItemDao>());
-        dao.getData().addAll(0,newDao.getData());
+        dao.getData().addAll(0, newDao.getData());
+    }
+    public void appenDaoAtBottomPosition(PhotoItemCollectionDao newDao) {
+        if (dao == null)
+            dao = new PhotoItemCollectionDao();
+        if (dao.getData() == null)
+            dao.setData(new ArrayList<PhotoItemDao>());
+        dao.getData().addAll(dao.getData().size(), newDao.getData());
     }
 
     public int getMaximumId() {
@@ -50,10 +57,24 @@ public class PhotoListManager {
             maxId = Math.max(maxId, dao.getData().get(i).getId());
         return maxId;
     }
-    public  int getCount(){
-        if(dao == null)
-            return  0;
-        if(dao.getData() == null)
+
+    public int getMinimumId() {
+        if (dao == null)
+            return 0;
+        if (dao.getData() == null)
+            return 0;
+        if (dao.getData().size() == 0)
+            return 0;
+        int minId = dao.getData().get(0).getId();
+        for (int i = 1; i < dao.getData().size(); i++)
+            minId = Math.min(minId, dao.getData().get(i).getId());
+        return minId;
+    }
+
+    public int getCount() {
+        if (dao == null)
+            return 0;
+        if (dao.getData() == null)
             return 0;
         return dao.getData().size();
     }

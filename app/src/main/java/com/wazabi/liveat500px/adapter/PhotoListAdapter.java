@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.ProgressBar;
 
 import com.wazabi.liveat500px.R;
 import com.wazabi.liveat500px.dao.PhotoItemCollectionDao;
@@ -28,10 +29,10 @@ public class PhotoListAdapter extends BaseAdapter {
     @Override
     public int getCount() {
         if( dao== null)
-            return 0;
+            return 1;
         if( dao== null)
-            return 0;
-        return dao.getData().size();
+            return 1;
+        return dao.getData().size()+1;
     }
 
     @Override
@@ -45,7 +46,25 @@ public class PhotoListAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getViewTypeCount() {
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position == getCount() -1 ?1 : 0;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        if(position == getCount() -1){
+            ProgressBar item;
+            if(convertView != null)
+                item = (ProgressBar) convertView;
+            else
+                item = new ProgressBar(parent.getContext());
+            return item;
+        }
         PhotoListItem item;
         if (convertView != null)
             item = (PhotoListItem) convertView;
@@ -55,9 +74,9 @@ public class PhotoListAdapter extends BaseAdapter {
         PhotoItemDao dao =(PhotoItemDao) getItem(position);
         item.setNameText(dao.getCaption());
         item.setDescriptionText(dao.getUsername()+"\n" + dao.getCamera());
-        String imgView = dao.getImageUrl().toString().replaceAll("]","").replace("[","");
+        String imgView = dao.getImageUrl();
         Log.d("imgView","imgView"+imgView);
-        item.setImageUrl(imgView);
+        item.setImageUrl(dao.getImageUrl());
         if(position>lastPosition) {
 
             Animation anim = AnimationUtils.loadAnimation(parent.getContext(), R.anim.up_from_bottom);

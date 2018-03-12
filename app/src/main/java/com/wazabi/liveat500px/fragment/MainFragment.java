@@ -3,6 +3,7 @@ package com.wazabi.liveat500px.fragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,7 +59,7 @@ public class MainFragment extends Fragment {
 
     private void initInstances(View rootView) {
         photoListManager = new PhotoListManager();
-        btnNewPhotos = (Button)rootView.findViewById(R.id.btnNewPhotos);
+        btnNewPhotos = (Button) rootView.findViewById(R.id.btnNewPhotos);
         btnNewPhotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,6 +90,12 @@ public class MainFragment extends Fragment {
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
                 swipeRefreshLayout.setEnabled(i == 0);
+                if (i + i1 >= i2) {
+                    if (photoListManager.getCount() > 0) {
+                        loadMoreData();
+                    }
+
+                }
 
             }
         });
@@ -108,6 +115,7 @@ public class MainFragment extends Fragment {
 
         public static final int MODE_RELOAD = 1;
         public static final int MODE_RELOAD_NEWER = 2;
+        public static final int MODE_LOAD_MORE = 3;
 
         int mode;
 
@@ -125,22 +133,29 @@ public class MainFragment extends Fragment {
                 View c = listView.getChildAt(0);
                 int top = c == null ? 0 : c.getTop();
 
-                if (mode == MODE_RELOAD_NEWER)
+                if (mode == MODE_RELOAD_NEWER) {
                     photoListManager.insertDaoAtTopPosition(dao);
-                else
+                } else if (mode == MODE_LOAD_MORE) {
+                    photoListManager.appenDaoAtBottomPosition(dao);
+                    isLoadingMore = false;
+                } else {
                     photoListManager.setDao(dao);
+                }
                 listAdapter.setDao(photoListManager.getDao());
                 listAdapter.notifyDataSetChanged();
+
 
                 if (mode == MODE_RELOAD_NEWER) {
                     int additionalSize = (dao != null && dao.getData() != null) ? dao.getData().size() : 0;
                     listAdapter.increaseLastPosition(additionalSize);
-                    listView.setSelectionFromTop(firstVisiblePosition + additionalSize,top);
-                    if(additionalSize >0)
+                    listView.setSelectionFromTop(firstVisiblePosition + additionalSize, top);
+                    if (additionalSize > 0)
                         showButtonNewPhotos();
                 }
                 Toast.makeText(Contextor.getInstance().getContext(), "Load Completed ", Toast.LENGTH_SHORT).show();
             } else {
+                if (mode == MODE_LOAD_MORE)
+                    isLoadingMore = false;
                 try {
                     Toast.makeText(Contextor.getInstance().getContext(), response.errorBody().string(), Toast.LENGTH_SHORT).show();
                 } catch (IOException e) {
@@ -167,6 +182,19 @@ public class MainFragment extends Fragment {
         Call<PhotoItemCollectionDao> call = HttpManager.getInstance().getService().loadPhotoList();
         call.enqueue(new PhotoListLoadCallback(PhotoListLoadCallback.MODE_RELOAD));
     }
+
+    boolean isLoadingMore = false;
+
+    private void loadMoreData() {
+        if (isLoadingMore)
+            return;
+        isLoadingMore = true;
+
+        int minId = photoListManager.getMinimumId();
+        Call<PhotoItemCollectionDao> call = HttpManager.getInstance().getService().loadPhotoListBeforeId(minId);
+        call.enqueue(new PhotoListLoadCallback(PhotoListLoadCallback.MODE_LOAD_MORE));
+    }
+
 
     @Override
     public void onStart() {
@@ -198,14 +226,15 @@ public class MainFragment extends Fragment {
         }
     }
 
-    public  void showButtonNewPhotos(){
+    public void showButtonNewPhotos() {
         btnNewPhotos.setVisibility(View.VISIBLE);
-        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),R.anim.zoom_face_in);
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(), R.anim.zoom_face_in);
         btnNewPhotos.startAnimation(anim);
     }
-    public  void  hideButtonNewPhotos(){
+
+    public void hideButtonNewPhotos() {
         btnNewPhotos.setVisibility(View.GONE);
-        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(),R.anim.zoom_face_out);
+        Animation anim = AnimationUtils.loadAnimation(Contextor.getInstance().getContext(), R.anim.zoom_face_out);
         btnNewPhotos.startAnimation(anim);
     }
 }
