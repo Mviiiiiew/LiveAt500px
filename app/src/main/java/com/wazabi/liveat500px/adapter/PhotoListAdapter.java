@@ -11,6 +11,7 @@ import android.widget.ProgressBar;
 import com.wazabi.liveat500px.R;
 import com.wazabi.liveat500px.dao.PhotoItemCollectionDao;
 import com.wazabi.liveat500px.dao.PhotoItemDao;
+import com.wazabi.liveat500px.datatype.MutableInteger;
 import com.wazabi.liveat500px.manager.PhotoListManager;
 import com.wazabi.liveat500px.view.PhotoListItem;
 
@@ -20,7 +21,11 @@ import com.wazabi.liveat500px.view.PhotoListItem;
 
 public class PhotoListAdapter extends BaseAdapter {
     PhotoItemCollectionDao dao;
-    int lastPosition = -1;
+    MutableInteger lastPositionInteger;
+
+    public PhotoListAdapter(MutableInteger lastPositionInteger) {
+        this.lastPositionInteger = lastPositionInteger;
+    }
 
     public void setDao(PhotoItemCollectionDao dao) {
         this.dao = dao;
@@ -77,16 +82,16 @@ public class PhotoListAdapter extends BaseAdapter {
         String imgView = dao.getImageUrl();
         Log.d("imgView","imgView"+imgView);
         item.setImageUrl(dao.getImageUrl());
-        if(position>lastPosition) {
 
+        if(position>lastPositionInteger.getValue()) {
             Animation anim = AnimationUtils.loadAnimation(parent.getContext(), R.anim.up_from_bottom);
             item.startAnimation(anim);
-            lastPosition = position;
+            lastPositionInteger.setValue(position);
         }
         return item;
     }
 
     public  void  increaseLastPosition(int amount){
-        lastPosition += amount;
+        lastPositionInteger.setValue(lastPositionInteger.getValue()+amount);
     }
 }

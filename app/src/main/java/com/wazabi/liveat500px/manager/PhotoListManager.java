@@ -1,6 +1,8 @@
 package com.wazabi.liveat500px.manager;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.os.Bundle;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import com.wazabi.liveat500px.dao.PhotoItemCollectionDao;
@@ -19,6 +21,7 @@ public class PhotoListManager {
 
     public PhotoListManager() {
         mContext = Contextor.getInstance().getContext();
+        loadCache();
     }
 
     public PhotoItemCollectionDao getDao() {
@@ -27,6 +30,7 @@ public class PhotoListManager {
 
     public void setDao(PhotoItemCollectionDao dao) {
         this.dao = dao;
+        saveCache();
 
     }
 
@@ -36,6 +40,7 @@ public class PhotoListManager {
         if (dao.getData() == null)
             dao.setData(new ArrayList<PhotoItemDao>());
         dao.getData().addAll(0, newDao.getData());
+        saveCache();
     }
     public void appenDaoAtBottomPosition(PhotoItemCollectionDao newDao) {
         if (dao == null)
@@ -43,6 +48,7 @@ public class PhotoListManager {
         if (dao.getData() == null)
             dao.setData(new ArrayList<PhotoItemDao>());
         dao.getData().addAll(dao.getData().size(), newDao.getData());
+        saveCache();
     }
 
     public int getMaximumId() {
@@ -78,4 +84,29 @@ public class PhotoListManager {
             return 0;
         return dao.getData().size();
     }
+
+    public Bundle onSveInstanceState(){
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("dao",dao);
+
+        return  bundle;
+    }
+
+    public  void  onRestoreInstanceState(Bundle saveInstanceState){
+        dao = saveInstanceState.getParcelable("dao");
+
+    }
+
+    private void  saveCache(){
+        SharedPreferences prefs = mContext.getSharedPreferences("photos",Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.apply();
+
+    }
+
+    private void  loadCache(){
+
+    }
+
+
 }
