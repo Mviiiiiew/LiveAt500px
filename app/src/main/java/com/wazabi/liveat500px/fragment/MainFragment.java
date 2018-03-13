@@ -1,5 +1,6 @@
 package com.wazabi.liveat500px.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,14 +12,17 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import com.wazabi.liveat500px.R;
+import com.wazabi.liveat500px.activity.MoreInfoActivity;
 import com.wazabi.liveat500px.adapter.PhotoListAdapter;
 import com.wazabi.liveat500px.dao.PhotoItemCollectionDao;
+import com.wazabi.liveat500px.dao.PhotoItemDao;
 import com.wazabi.liveat500px.datatype.MutableInteger;
 import com.wazabi.liveat500px.manager.HttpManager;
 import com.wazabi.liveat500px.manager.PhotoListManager;
@@ -40,6 +44,9 @@ public class MainFragment extends Fragment {
      VARIABLES
 
      *****************/
+    public  interface  FragmentListener{
+        void  onPhotoItemClicked(PhotoItemDao dao);
+    }
 
 
     ListView listView;
@@ -101,6 +108,7 @@ public class MainFragment extends Fragment {
         swipeRefreshLayout = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeRefreshLayout);
         swipeRefreshLayout.setOnRefreshListener(pullToRefreshListener);
         listView.setOnScrollListener(listviewScrollListener);
+        listView.setOnItemClickListener(listViewItemClickListener);
         if(savedInstanceState == null)
         refreshData();
 
@@ -202,6 +210,16 @@ public class MainFragment extends Fragment {
     /*****************
      LISTENER ZONE
      *****************/
+    AdapterView.OnItemClickListener listViewItemClickListener = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+            if(position < photoListManager.getCount()) {
+                PhotoItemDao dao = photoListManager.getDao().getData().get(position);
+                FragmentListener listener = (FragmentListener) getActivity();
+                listener.onPhotoItemClicked(dao);
+            }
+        }
+    };
 
     View.OnClickListener buttonClickListener = new View.OnClickListener() {
         @Override
@@ -243,7 +261,9 @@ public class MainFragment extends Fragment {
             }
 
         }
+
     };
+
 
 
     /*****************

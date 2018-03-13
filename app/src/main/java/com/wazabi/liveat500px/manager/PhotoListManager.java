@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.google.gson.Gson;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import com.wazabi.liveat500px.dao.PhotoItemCollectionDao;
 import com.wazabi.liveat500px.dao.PhotoItemDao;
@@ -98,14 +99,24 @@ public class PhotoListManager {
     }
 
     private void  saveCache(){
+        PhotoItemCollectionDao cacheDao = new PhotoItemCollectionDao();
+        if(dao != null && dao.getData() != null)
+        cacheDao.setData(dao.getData().subList(0,Math.min(20,dao.getData().size())));
+        String json = new Gson().toJson(cacheDao);
+
         SharedPreferences prefs = mContext.getSharedPreferences("photos",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("json",json);
         editor.apply();
 
     }
 
     private void  loadCache(){
-
+        SharedPreferences prefs = mContext.getSharedPreferences("photos",Context.MODE_PRIVATE);
+        String json = prefs.getString("json",null);
+        if(json == null)
+            return;
+            dao = new Gson().fromJson(json,PhotoItemCollectionDao.class);
     }
 
 
