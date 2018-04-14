@@ -337,4 +337,5 @@ public class MainFragment extends Fragment {
                 isLoadingMore = false;
         }
     }
+
 }
