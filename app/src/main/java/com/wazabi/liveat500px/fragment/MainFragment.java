@@ -2,11 +2,15 @@ package com.wazabi.liveat500px.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -17,8 +21,16 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.inthecheesefactory.thecheeselibrary.manager.Contextor;
 import com.wazabi.liveat500px.R;
+import com.wazabi.liveat500px.activity.MainActivity;
+import com.wazabi.liveat500px.activity.MainLoginActivity;
 import com.wazabi.liveat500px.activity.MoreInfoActivity;
 import com.wazabi.liveat500px.adapter.PhotoListAdapter;
 import com.wazabi.liveat500px.dao.PhotoItemCollectionDao;
@@ -55,6 +67,8 @@ public class MainFragment extends Fragment {
     PhotoListManager photoListManager;
     Button btnNewPhotos;
     MutableInteger lastPositionInteger;
+
+
 
 
 
@@ -98,7 +112,7 @@ public class MainFragment extends Fragment {
 
     private void initInstances(View rootView,Bundle savedInstanceState) {
         // Init 'View' instance(s) with rootView.findViewById here
-
+        setHasOptionsMenu(true);
         btnNewPhotos = (Button) rootView.findViewById(R.id.btnNewPhotos);
         btnNewPhotos.setOnClickListener(buttonClickListener);
         listView = (ListView) rootView.findViewById(R.id.listView);
@@ -111,6 +125,7 @@ public class MainFragment extends Fragment {
         listView.setOnItemClickListener(listViewItemClickListener);
         if(savedInstanceState == null)
         refreshData();
+
 
 
     }
@@ -337,5 +352,6 @@ public class MainFragment extends Fragment {
                 isLoadingMore = false;
         }
     }
+
 
 }

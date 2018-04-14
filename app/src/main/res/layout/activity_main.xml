@@ -37,9 +37,10 @@
         android:layout_width="@dimen/drawer_menu_width"
         android:layout_height="match_parent">
         <Button
-            android:text="Simple Button"
+            android:id="@+id/btnLogout"
+            android:text="Logout"
             android:contentDescription="Simple Button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </LinearLayout>
 

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1048535698253",
+    "firebase_url": "https://liveat500px-cb180.firebaseio.com",
+    "project_id": "liveat500px-cb180",
+    "storage_bucket": "liveat500px-cb180.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1048535698253:android:f67d38f520c63361",
+        "android_client_info": {
+          "package_name": "com.wazabi.liveat500px"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1048535698253-eqvdutkj81pg3lnjjg3ltrukom1vklrc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wazabi.liveat500px",
+            "certificate_hash": "d68654a6f2e52d85469b07224f4bd58d1bb58f5c"
+          }
+        },
+        {
+          "client_id": "1048535698253-hapm0phshiqvfqttn5qjd3a9u7tqkpth.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIlRe0SGXBDyS1Czvo1MULZz6HlDOMskU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1048535698253-hapm0phshiqvfqttn5qjd3a9u7tqkpth.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

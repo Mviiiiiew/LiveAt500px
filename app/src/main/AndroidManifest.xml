@@ -12,21 +12,23 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"></activity>
+
+        <meta-data
+            android:name="com.wazabi.liveat500px.configuration.GlideConfiguration"
+            android:value="GlideModule" />
+
+        <activity
+            android:name=".activity.MoreInfoActivity"
+            android:theme="@style/AppThemeWithActionBar" />
+        <activity android:name=".activity.MainLoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <meta-data
-            android:name="com.wazabi.liveat500px.configuration.GlideConfiguration"
-            android:value="GlideModule" />
-
-        <activity android:name=".activity.MoreInfoActivity"
-            android:theme="@style/AppThemeWithActionBar"
-            ></activity>
+        <activity android:name=".activity.BaseActivity"></activity>
     </application>
 
 </manifest>
