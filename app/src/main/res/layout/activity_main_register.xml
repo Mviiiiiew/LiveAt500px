@@ -4,16 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FBE1F7"
-    tools:context="com.wazabi.liveat500px.activity.MainLoginActivity">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-
-
-
+    tools:context="com.wazabi.liveat500px.activity.MainRegisterActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,19 +13,12 @@
         android:paddingRight="24dp"
         android:paddingTop="56dp">
 
-
-            <ImageView
-                android:layout_width="293dp"
-                android:layout_height="85dp"
-                android:scaleType="centerCrop"
-                android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="24dp"
-                android:src="@drawable/live500" />
-
-
-
-
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="72dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:src="@drawable/live500" />
 
         <!-- Email Label -->
         <android.support.design.widget.TextInputLayout
@@ -46,9 +30,10 @@
             <EditText
                 android:id="@+id/editText_input_email"
                 android:layout_width="match_parent"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
+            android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:hint="Email"
                 android:inputType="textEmailAddress" />
         </android.support.design.widget.TextInputLayout>
@@ -58,53 +43,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginTop="8dp">
 
             <EditText
                 android:id="@+id/editText_input_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+
                 android:hint="Password"
                 android:inputType="textPassword" />
         </android.support.design.widget.TextInputLayout>
 
 
         <Button
-            android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:background="#ffffff"
             android:layout_marginTop="24dp"
             android:padding="12dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:background="#FBE1F7"
-            android:text="Login" />
-
-        <TextView
-            android:id="@+id/txt_link_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-
-            android:gravity="center"
-            android:text="No account yet? Create one"
-            android:textSize="16dip" />
+            android:text="Register" />
 
 
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_loginGoogle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                tools:visibility="visible" />
+
+
 
 
 
 
     </LinearLayout>
-    </ScrollView>
-
 
 </LinearLayout>

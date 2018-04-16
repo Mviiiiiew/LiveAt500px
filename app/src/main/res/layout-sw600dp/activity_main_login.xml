@@ -45,7 +45,8 @@
 
             <EditText
                 android:id="@+id/editText_input_email"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
+                android:layout_gravity="center"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:layout_height="wrap_content"
@@ -62,7 +63,8 @@
 
             <EditText
                 android:id="@+id/editText_input_password"
-                android:layout_width="match_parent"
+                android:layout_width="400dp"
+                android:layout_gravity="center"
                 android:layout_height="wrap_content"
                 android:hint="Password"
                 android:inputType="textPassword" />
@@ -71,19 +73,21 @@
 
         <Button
             android:id="@+id/btn_login"
-            android:layout_width="fill_parent"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
+            android:background="#FBE1F7"
+            android:textStyle="bold"
+            android:textSize="24sp"
             android:layout_marginTop="24dp"
             android:padding="12dp"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:background="#FBE1F7"
             android:text="Login" />
 
         <TextView
             android:id="@+id/txt_link_signup"
-            android:layout_width="fill_parent"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
 
@@ -95,16 +99,16 @@
 
             <com.google.android.gms.common.SignInButton
                 android:id="@+id/btn_loginGoogle"
-                android:layout_width="match_parent"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
+                android:layout_gravity="center"
                 tools:visibility="visible" />
 
 
 
 
     </LinearLayout>
+
     </ScrollView>
-
-
 </LinearLayout>

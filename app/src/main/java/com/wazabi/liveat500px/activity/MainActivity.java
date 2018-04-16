@@ -49,6 +49,14 @@ public class MainActivity extends AppCompatActivity implements MainFragment.Frag
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
     private void inintInstances() {
         toolbar = (Toolbar)findViewById(R.id.toolbar);
         btnLogout = (Button)findViewById(R.id.btnLogout);

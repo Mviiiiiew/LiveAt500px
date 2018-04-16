@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity android:name=".activity.MainActivity" />
 
         <meta-data
             android:name="com.wazabi.liveat500px.configuration.GlideConfiguration"
@@ -21,14 +21,17 @@
         <activity
             android:name=".activity.MoreInfoActivity"
             android:theme="@style/AppThemeWithActionBar" />
-        <activity android:name=".activity.MainLoginActivity">
+        <activity android:name=".activity.MainLoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name=".activity.BaseActivity"></activity>
+        <activity android:name=".activity.BaseActivity" />
+        <activity android:name=".activity.MainRegisterActivity"></activity>
     </application>
 
 </manifest>

@@ -2,7 +2,8 @@
     <string name="app_name">Live @ 500px</string>
     <string name="open_drawer">Open Menu</string>
     <string name="close_drawer">Close Menu</string>
-
+    <string name="facebook_app_id">122252941780760</string>
+    <string name="fb_login_protocol_scheme">fb122252941780760</string>
 
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>

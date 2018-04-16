@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,8 +29,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.wazabi.liveat500px.R;
 
-public class MainLoginActivity extends BaseActivity implements
-        View.OnClickListener {
+public class MainLoginActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "GoogleActivity";
     private static final int RC_SIGN_IN = 9001;
 
@@ -37,8 +38,11 @@ public class MainLoginActivity extends BaseActivity implements
     // [END declare_auth]
 
     private GoogleSignInClient mGoogleSignInClient;
-    private TextView mStatusTextView;
-    private TextView mDetailTextView;
+    SignInButton btn_loginGoogle;
+    EditText editText_input_password;
+    EditText editText_input_email;
+    Button btn_login;
+    TextView txt_link_signup;
 
 
     @Override
@@ -47,15 +51,18 @@ public class MainLoginActivity extends BaseActivity implements
         setContentView(R.layout.activity_main_login);
 
 
-
-        // Views
-        mStatusTextView = findViewById(R.id.status);
-        mDetailTextView = findViewById(R.id.detail);
-
         // Button listeners
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
-        findViewById(R.id.sign_out_button).setOnClickListener(this);
-        findViewById(R.id.disconnect_button).setOnClickListener(this);
+
+        btn_loginGoogle = (SignInButton) findViewById(R.id.btn_loginGoogle);
+        btn_login = (Button) findViewById(R.id.btn_login);
+        editText_input_password = (EditText) findViewById(R.id.editText_input_password);
+        editText_input_email = (EditText) findViewById(R.id.editText_input_email);
+        txt_link_signup = (TextView) findViewById(R.id.txt_link_signup);
+
+        btn_loginGoogle.setOnClickListener(this);
+        txt_link_signup.setOnClickListener(this);
+        btn_login.setOnClickListener(this);
+
 
         // [START config_signin]
         // Configure Google Sign In
@@ -73,6 +80,14 @@ public class MainLoginActivity extends BaseActivity implements
     }
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
@@ -83,9 +98,11 @@ public class MainLoginActivity extends BaseActivity implements
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
                 firebaseAuthWithGoogle(account);
+
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
                 Log.w(TAG, "Google sign in failed", e);
+
 
                 // [END_EXCLUDE]
             }
@@ -110,11 +127,12 @@ public class MainLoginActivity extends BaseActivity implements
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
 
-                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                             startActivity(intent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
+
 
                         }
 
@@ -134,14 +152,64 @@ public class MainLoginActivity extends BaseActivity implements
     // [END signin]
 
 
+    private void signInEmail(String email, String password) {
+        Log.d(TAG, "signIn:" + email);
 
+
+        showProgressDialog();
+
+        // [START sign_in_with_email]
+        mAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                            startActivity(intent);
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                            Toast.makeText(MainLoginActivity.this, "Login failed.",
+                                    Toast.LENGTH_SHORT).show();
+
+                        }
+
+                        // [START_EXCLUDE]
+
+                        hideProgressDialog();
+                        // [END_EXCLUDE]
+                    }
+                });
+        // [END sign_in_with_email]
+    }
+
+
+    private void register() {
+        Intent intent = new Intent(getApplicationContext(), MainRegisterActivity.class);
+        startActivity(intent);
+    }
 
 
     @Override
     public void onClick(View v) {
         int i = v.getId();
-        if (i == R.id.sign_in_button) {
+        if (i == R.id.btn_loginGoogle) {
             signIn();
+        } else if (i == R.id.txt_link_signup) {
+            register();
+        } else if (i == R.id.btn_login) {
+            String mEmail = editText_input_email.getText().toString().replace(" ","");
+            String mPass = editText_input_password.getText().toString().replace(" ","");
+            if(mEmail.equals("") || mPass.equals("")){
+                Toast.makeText(getApplicationContext(),"Please enter your username and password again",Toast.LENGTH_LONG).show();
+            }else{
+
+                signInEmail(mEmail, mPass);
+            }
+
+
         }
     }
 }
+
