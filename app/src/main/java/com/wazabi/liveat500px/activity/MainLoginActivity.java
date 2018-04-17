@@ -199,11 +199,11 @@ public class MainLoginActivity extends BaseActivity implements View.OnClickListe
         } else if (i == R.id.txt_link_signup) {
             register();
         } else if (i == R.id.btn_login) {
-            String mEmail = editText_input_email.getText().toString().replace(" ","");
-            String mPass = editText_input_password.getText().toString().replace(" ","");
-            if(mEmail.equals("") || mPass.equals("")){
-                Toast.makeText(getApplicationContext(),"Please enter your username and password again",Toast.LENGTH_LONG).show();
-            }else{
+            String mEmail = editText_input_email.getText().toString().replace(" ", "");
+            String mPass = editText_input_password.getText().toString().replace(" ", "");
+            if (mEmail.equals("") || mPass.equals("")) {
+                Toast.makeText(getApplicationContext(), R.string.LoginFail, Toast.LENGTH_LONG).show();
+            } else {
 
                 signInEmail(mEmail, mPass);
             }

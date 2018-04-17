@@ -1,0 +1,10 @@
+<resources>
+
+    <string name="email">อีเมล์</string>
+    <string name="password">รหัสผ่าน</string>
+    <string name="login">เข้าสู่ระบบ</string>
+    <string name="register">สมัคร</string>
+    <string name="no_account_yet_create_one">ไม่มีสมาชิก?ลงทะเบียน</string>
+    <string name="LoginFail">กรุณาใส่อีเมล์และพาสเวิร์ดอีกครั้ง</string>
+
+</resources>

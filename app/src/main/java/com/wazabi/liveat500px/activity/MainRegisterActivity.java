@@ -36,7 +36,7 @@ public class MainRegisterActivity extends BaseActivity {
                 String mEmail = editText_input_email.getText().toString().replace(" ","");
                 String mPass = editText_input_password.getText().toString().replace(" ","");
                 if(mEmail.equals("") || mPass.equals("")){
-                    Toast.makeText(getApplicationContext(),"Please enter your username and password again",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), R.string.LoginFail,Toast.LENGTH_LONG).show();
                 }else{
 
                    saveValueToFirebase(mEmail,mPass);

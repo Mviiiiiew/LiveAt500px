@@ -14,101 +14,122 @@
 
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp"
-        android:paddingTop="56dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"
+            android:paddingTop="56dp">
 
 
-            <ImageView
-                android:layout_width="293dp"
-                android:layout_height="85dp"
-                android:scaleType="centerCrop"
+
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="400dp"
                 android:layout_margin="10dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="24dp"
-                android:src="@drawable/live500" />
-
-
-
-
-
-        <!-- Email Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
-
-            <EditText
-                android:id="@+id/editText_input_email"
-                android:layout_width="400dp"
                 android:layout_gravity="center"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:layout_height="wrap_content"
-                android:hint="Email"
-                android:inputType="textEmailAddress" />
-        </android.support.design.widget.TextInputLayout>
+                android:background="#ffffff"
+                android:padding="20dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
+                    <TextView
 
-        <!-- Password Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp">
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_marginBottom="30dp"
+                        android:text="Live@500"
+                        android:textSize="40sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000"/>
 
-            <EditText
-                android:id="@+id/editText_input_password"
-                android:layout_width="400dp"
-                android:layout_gravity="center"
-                android:layout_height="wrap_content"
-                android:hint="Password"
-                android:inputType="textPassword" />
-        </android.support.design.widget.TextInputLayout>
+                    <!-- Email Label -->
+                    <android.support.design.widget.TextInputLayout
 
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:id="@+id/txt_1"
+                        >
 
-        <Button
-            android:id="@+id/btn_login"
-            android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:background="#FBE1F7"
-            android:textStyle="bold"
-            android:textSize="24sp"
-            android:layout_marginTop="24dp"
-            android:padding="12dp"
-            android:text="Login" />
+                        <EditText
+                            android:id="@+id/editText_input_email"
+                            android:layout_width="match_parent"
+                            android:focusable="true"
+                            android:focusableInTouchMode="true"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress" />
+                    </android.support.design.widget.TextInputLayout>
 
-        <TextView
-            android:id="@+id/txt_link_signup"
-            android:layout_width="300dp"
-            android:layout_gravity="center"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+                    <!-- Password Label -->
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:id="@+id/txt_2"
+                        >
 
-            android:gravity="center"
-            android:text="No account yet? Create one"
-            android:textSize="16dip" />
-
-
-
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/btn_loginGoogle"
-                android:layout_width="300dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                android:layout_gravity="center"
-                tools:visibility="visible" />
+                        <EditText
+                            android:id="@+id/editText_input_password"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/password"
+                            android:inputType="textPassword" />
+                    </android.support.design.widget.TextInputLayout>
 
 
+                    <Button
+                        android:id="@+id/btn_login"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+                        android:padding="12dp"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:background="#FBE1F7"
+                        android:text="@string/login" />
+
+                    <TextView
+                        android:id="@+id/txt_link_signup"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="24dp"
+                        android:layout_below="@+id/btn_login"
+                        android:gravity="center"
+                        android:text="@string/no_account_yet_create_one"
+                        android:textSize="16dip" />
 
 
-    </LinearLayout>
 
+                    <com.google.android.gms.common.SignInButton
+                        android:id="@+id/btn_loginGoogle"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_link_signup"
+                        android:visibility="visible"
+                        tools:visibility="visible" />
+
+
+                </LinearLayout>
+
+
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
     </ScrollView>
+
+
 </LinearLayout>
